@@ -5,7 +5,7 @@ import usePlatforms from "../hooks/usePlatforms";
 
 interface Props {
   selectedPlatform: Platform | null;
-  onSelectPlatform: (platform: Platform) => void;
+  onSelectPlatform: (platform: Platform | null) => void;
 }
 
 const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
@@ -21,6 +21,9 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
         {selectedPlatform?.name || "Platforms"}
       </MenuButton>
       <MenuList>
+        <MenuItem onClick={() => onSelectPlatform(null)} key={"all"}>
+          All Platforms
+        </MenuItem>
         {data.map((platform) => (
           <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id}>
             {platform.name}
