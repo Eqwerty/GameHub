@@ -15,10 +15,8 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   }
 
   if (isLoading) {
-    const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-    return skeletons.map((skeleton) => (
-      <HStack key={skeleton} paddingY="5px">
+    return Array.from({ length: 12 }).map((_, index) => (
+      <HStack key={index} paddingY="5px">
         <SkeletonCircle size="8" />
         <Skeleton height="5" width="80%" />
       </HStack>
