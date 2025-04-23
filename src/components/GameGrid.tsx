@@ -17,24 +17,13 @@ const GameGrid = ({ gameQuery }: Props) => {
   }
 
   return (
-    <>
-      <SimpleGrid
-        columns={{
-          sm: 1,
-          md: 2,
-          lg: 3,
-          xl: 4,
-        }}
-        spacing={6}
-        padding="10px"
-      >
-        {isLoading ? getGameCardSkeletons() : getGameCards(data)}
-      </SimpleGrid>
-    </>
+    <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6} padding="10px">
+      {isLoading ? renderSkeletons() : renderGameCards(data)}
+    </SimpleGrid>
   );
 };
 
-const getGameCards = (games: Game[]) => {
+const renderGameCards = (games: Game[]) => {
   if (games.length === 0) {
     return <Text>No games found</Text>;
   }
@@ -46,10 +35,9 @@ const getGameCards = (games: Game[]) => {
   ));
 };
 
-const getGameCardSkeletons = () => {
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
-  return skeletons.map((skeleton) => (
-    <GameCardContainer key={skeleton}>
+const renderSkeletons = () => {
+  return Array.from({ length: 8 }, (_, index) => (
+    <GameCardContainer key={index}>
       <GameCardSkeleton />
     </GameCardContainer>
   ));
